@@ -6,6 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Font CSS  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Protest+Strike&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
 
   <!-- Icon CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -34,16 +39,18 @@
     <div class="sidebar">
       <h1>Smart To Do</h1>
       <ul>
-        <li><button>Create New List</button></li>
-        <li><button>My List<i class="fa-sharp fa-solid fa-angle-down"></i></button></li>
-        <li><button>Filter By <i class="fa-solid fa-list"></i></button></li>
-        <li><button><i class="fa-regular fa-square-check"></i> All</button></li>
-        <li><button><i class="fa-solid fa-film"></i> Watch</button></li>
-        <li><button><i class="fa-solid fa-utensils"></i> Eat</button></li>
-        <li><button><i class="fa-solid fa-book"></i> Read</button></li>
-        <li><button><i class="fa-solid fa-cart-shopping"></i> Buy</button></li>
-        <li><button><i class="fa-solid fa-flag"></i> Priority</button></li>
-        <li><button>Completed</button></li>
+        <li><span>Create New List</span><i class="fa-solid fa-square-plus"></i></li>
+        <li><span>My List</span><i class="fa-sharp fa-solid fa-angle-down"></i></li>
+        <li><span>Filter By</span> <i class="fa-solid fa-list"></i></li>
+        <div class="filter-list">
+          <li><i class="fa-regular fa-square-check"></i> All</li>
+          <li><i class="fa-solid fa-film"></i> Watch</li>
+          <li><i class="fa-solid fa-utensils"></i> Eat</li>
+          <li><i class="fa-solid fa-book"></i> Read</li>
+          <li><i class="fa-solid fa-cart-shopping"></i> Buy</li>
+          <li><i class="fa-solid fa-flag"></i> Priority</li>
+          <li><i class="fa-solid fa-circle-check"></i>Completed</li>
+        </div>
       </ul>
     </div>
 
@@ -55,99 +62,62 @@
         <span><button class="new-task"><i class="fa-solid fa-circle-plus"></i></button></span>
       </header>
 
-      <article class="tasks-list">
-        <div class="task-icon">Placeholder</div>
+      <div class="task-container">
 
-        <span class="task-content">
-          <div class="task-complete"><i class="fa-regular fa-circle"></i></div>
-          <div class="task-name">Buy Milk</div>
-        </span>
+        <article class="tasks-list">
+          <div class="task-icon">Category Icon</div>
 
-        <span class="task-content">
-          <div class="task-priority"><i class="fa-solid fa-flag"></i></div>
-          <div class="task-edit"><i class="fa-solid fa-pen-to-square"></i></div>
-          <div class="task-delete"><i class="fa-solid fa-trash-can"></i></div>
-        </span>
+          <span class="task-content">
+            <div class="task-complete"><i class="fa-regular fa-circle"></i></div>
+            <div class="task-name">Task Name Here</div>
+          </span>
 
-      </article>
+          <span class="task-content">
+            <div class="task-priority"><i class="fa-solid fa-flag"></i></div>
+            <div class="task-edit"><i class="fa-solid fa-pen-to-square"></i></div>
+            <div class="task-delete"><i class="fa-solid fa-trash-can"></i></div>
+          </span>
 
-      <article class="tasks-list">
-        <div class="task-icon">Placeholder</div>
+        </article>
 
-        <span class="task-content">
-          <div class="task-complete"><i class="fa-regular fa-circle"></i></div>
-          <div class="task-name">Buy Milk</div>
-        </span>
+        <article class="tasks-list">
+          <div class="task-icon">Category Icon</div>
 
-        <span class="task-content">
-          <div class="task-priority"><i class="fa-solid fa-flag"></i></div>
-          <div class="task-edit"><i class="fa-solid fa-pen-to-square"></i></div>
-          <div class="task-delete"><i class="fa-solid fa-trash-can"></i></div>
-        </span>
+          <span class="task-content">
+            <div class="task-complete"><i class="fa-regular fa-circle"></i></div>
+            <div class="task-name">Task Name Here</div>
+          </span>
 
-      </article>
+          <span class="task-content">
+            <div class="task-priority"><i class="fa-solid fa-flag"></i></div>
+            <div class="task-edit"><i class="fa-solid fa-pen-to-square"></i></div>
+            <div class="task-delete"><i class="fa-solid fa-trash-can"></i></div>
+          </span>
 
-      <article class="tasks-list">
-        <div class="task-icon">Placeholder</div>
+        </article>
 
-        <span class="task-content">
-          <div class="task-complete"><i class="fa-regular fa-circle"></i></div>
-          <div class="task-name">Buy Milk</div>
-        </span>
+        <article class="tasks-list">
+          <div class="task-icon">Category Icon</div>
 
-        <span class="task-content">
-          <div class="task-priority"><i class="fa-solid fa-flag"></i></div>
-          <div class="task-edit"><i class="fa-solid fa-pen-to-square"></i></div>
-          <div class="task-delete"><i class="fa-solid fa-trash-can"></i></div>
-        </span>
+          <span class="task-content">
+            <div class="task-complete"><i class="fa-regular fa-circle"></i></div>
+            <div class="task-name">Task Name Here</div>
+          </span>
 
-      </article>
+          <span class="task-content">
+            <div class="task-priority"><i class="fa-solid fa-flag"></i></div>
+            <div class="task-edit"><i class="fa-solid fa-pen-to-square"></i></div>
+            <div class="task-delete"><i class="fa-solid fa-trash-can"></i></div>
+          </span>
+
+        </article>
+
+      </div>
+
     </main>
 
 
   </div>
-
-
-  <!-- <nav class="nav-top"> -->
-  <!-- <span>Smart To Do List</span> -->
-  <!-- <div class="username">Username <i class="fa-sharp fa-solid fa-angle-down"></i></div> -->
-  <!-- </nav> -->
-
-  <!-- <div> -->
-  <!-- Side Nav Bar (FIXED)-->
-  <!-- <nav class="nav-side-bar"> -->
-  <!-- <div><button>Create New List</button></div> -->
-  <!-- <div><button>My List<i class="fa-sharp fa-solid fa-angle-down"></i></button></div> -->
-  <!-- <div><button>Filter By <i class="fa-solid fa-list"></i></button></div> -->
-  <!-- <div><button><i class="fa-regular fa-square-check"></i> All</button></div> -->
-  <!-- <div><button><i class="fa-solid fa-film"></i> Watch</button></div> -->
-  <!-- <div><button><i class="fa-solid fa-utensils"></i> Eat</button></div> -->
-  <!-- <div><button><i class="fa-solid fa-book"></i> Read</button></div> -->
-  <!-- <div><button><i class="fa-solid fa-cart-shopping"></i> Buy</button></div> -->
-  <!-- <div><button><i class="fa-solid fa-flag"></i> Priority</button></div> -->
-  <!-- <div><button>Completed</button></div> -->
-  <!-- </nav> -->
-
-  <!--Tasks Populated via jQuery-->
-  <!-- <main> -->
-  <!-- <div> -->
-  <!--List title-->
-  <!-- <header> -->
-  <!-- My Tasks -->
-  <!-- </header> -->
-
-  <!--Create a New Task-->
-  <!-- <span> -->
-  <!-- <button class="new-task"> -->
-  <!-- <i class="fa-solid fa-circle-plus"></i> -->
-  <!-- </button> -->
-  <!-- </span> -->
-  <!-- </div> -->
-  <!-- </main> -->
-
-
-
-
 
 </body>
 

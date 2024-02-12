@@ -3,6 +3,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   min-height: 100vh;
+  font-family: "Raleway", sans-serif;
 
   background: rgb(163, 208, 219);
   background: linear-gradient(
@@ -21,11 +22,15 @@ body {
   position: relative;
 }
 
+.wrapper .sidebar h1{
+  font-family: "Protest Strike", sans-serif;
+}
+
 .wrapper .sidebar{
   position: fixed;
   width: 200px;
   height: 100%;
-  background-color: lightgreen;
+  background-color: orange;
   padding: 30px 0;
 }
 
@@ -39,6 +44,22 @@ body {
   list-style-type: none;
   padding: 15px;
   border-bottom: 1px solid;
+}
+
+.wrapper .sidebar ul li span {
+  padding-right: 8px;
+}
+
+.wrapper .sidebar .filter-list{
+  display: none;
+}
+
+.wrapper .sidebar i{
+  padding-right: 8px;
+}
+
+.wrapper .sidebar .fa-circle-check{
+  color: green;
 }
 
 .wrapper .content{
@@ -76,54 +97,13 @@ body {
   padding: 0px 30px;
 }
 
+.tasks-list .task-content i{
+  padding: 0 6px;
+}
 
+.tasks-list .task-content i:hover{
+  box-shadow: 0 0px 11px yellow;
+}
 
-// .nav-top {
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-between;
-//   align-items: center;
-//   padding: 10px 15px;
-//   border-bottom: 3px solid;;
-//   position: fixed;
-//   width: 100%
-// }
-
-// .nav-top span {
-//   font-size: 30px;
-// }
-
-// .nav-side-bar {
-//   position: absolute;
-//   top: 4em;
-//   left: 0;
-//   width: 15%;
-//   height: 100%;
-//   background-color: white;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: flex-start;
-//   align-items: center;
-//   border-right: 3px solid;
-// }
-
-// .nav-side-bar button {
-//   padding: 5px;
-//   margin-top: 12px;
-//   margin-bottom: 10px;
-// }
-
-// main {
-//   position: fixed;
-//   padding-top: 56.8px;
-//   padding-left: 187.8px;
-//   width: 100%;
-// }
-
-// header{
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: flex-start;
-// }
 
 
