@@ -4,6 +4,7 @@ body {
   justify-content: space-between;
   min-height: 100vh;
   font-family: "Raleway", sans-serif;
+  margin: 0px;
 
   background: rgb(163, 208, 219);
   background: linear-gradient(
@@ -31,13 +32,17 @@ body {
   width: 200px;
   height: 100%;
   background-color: orange;
-  padding: 30px 0;
+  padding: 18px 0;
 }
 
 .wrapper .sidebar h1{
   color: white;
   text-align: center;
   margin-bottom: 25px;
+}
+
+.wrapper .sidebar ul{
+  padding-left: 5px;
 }
 
 .wrapper .sidebar ul li {
@@ -48,6 +53,11 @@ body {
 
 .wrapper .sidebar ul li span {
   padding-right: 8px;
+}
+
+.wrapper .sidebar ul li:hover{
+  cursor: pointer;
+  background: rgb(201, 134, 8);
 }
 
 .wrapper .sidebar .filter-list{
@@ -103,6 +113,7 @@ body {
 
 .tasks-list .task-content i:hover{
   box-shadow: 0 0px 11px yellow;
+  cursor: pointer;
 }
 
 
