@@ -6,70 +6,12 @@ body {
   font-family: "Raleway", sans-serif;
   margin: 0px;
 
-  background: rgb(163, 208, 219);
-  background: linear-gradient(
-    227deg,
-    rgba(163, 208, 219, 1) 0%,
-    rgba(163, 176, 219, 1) 20%,
-    rgba(163, 173, 219, 1) 34%,
-    rgba(163, 219, 208, 1) 59%,
-    rgba(163, 208, 219, 1) 74%,
-    rgba(163, 208, 219, 1) 100%
-  );
+  background: #f1e0c5;
 }
 
 .wrapper{
   display: flex;
   position: relative;
-}
-
-.wrapper .sidebar h1{
-  font-family: "Protest Strike", sans-serif;
-}
-
-.wrapper .sidebar{
-  position: fixed;
-  width: 200px;
-  height: 100%;
-  background-color: orange;
-  padding: 18px 0;
-}
-
-.wrapper .sidebar h1{
-  color: white;
-  text-align: center;
-  margin-bottom: 25px;
-}
-
-.wrapper .sidebar ul{
-  padding-left: 5px;
-}
-
-.wrapper .sidebar ul li {
-  list-style-type: none;
-  padding: 15px;
-  border-bottom: 1px solid;
-}
-
-.wrapper .sidebar ul li span {
-  padding-right: 8px;
-}
-
-.wrapper .sidebar ul li:hover{
-  cursor: pointer;
-  background: rgb(201, 134, 8);
-}
-
-.wrapper .sidebar .filter-list{
-  display: none;
-}
-
-.wrapper .sidebar i{
-  padding-right: 8px;
-}
-
-.wrapper .sidebar .fa-circle-check{
-  color: green;
 }
 
 .wrapper .content{
@@ -79,13 +21,19 @@ body {
 
 .wrapper .content .username{
   padding: 20px;
-  background-color: white;
+  background-color: #342a21;
   display: flex;
   justify-content: flex-end;
+  color: white;
+}
+
+.wrapper .content .username .fa-angle-down{
+  margin-left: 6px;
+  margin-top: 2px;
 }
 
 .wrapper .content .list-header{
-  background-color: gray;
+  background-color: #c9b79c;
   display: flex;
   justify-content: space-between;
   padding: 25px;

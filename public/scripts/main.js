@@ -21,15 +21,15 @@ $(function() {
     if (category === 1) {
       categoryIcon = '<i class="fa-solid fa-film"></i>';
 
-    // Foods Icon
+      // Foods Icon
     } else if (category === 2) {
       categoryIcon = '<i class="fa-solid fa-utensils"></i>';
 
-    // Books Icon
+      // Books Icon
     } else if (category === 3) {
       categoryIcon = '<i class="fa-solid fa-book"></i>';
 
-    // Products Icon
+      // Products Icon
     } else if (category == 4) {
       categoryIcon = '<i class="fa-solid fa-cart-shopping"></i>';
     }
@@ -55,7 +55,7 @@ $(function() {
 
       </article>
       `;
-    // Template for incomplete tasks
+      // Template for incomplete tasks
     } else {
       $task = `
       <article class="tasks-list">
@@ -78,28 +78,92 @@ $(function() {
     return $task;
   };
 
-  const renderTasks = function(tasks) {
+  // Assignment of filter buttons
+  const $allCategories = $('.all-categories');
+  const $toWatchOnly = $('.to-watch');
+  const $toEatOnly = $('.to-eat');
+  const $toReadOnly = $('.to-read');
+  const $toBuyOnly = $('.to-buy');
+  const $prorityTasks = $('.priority-tasks');
+  const $completedTasks = $('.completed-tasks');
+  let filter = null;
+
+  // Displays all tasks
+  $allCategories.on('click', function() {
+    filter = null;
+    loadTasks(filter);
+  })
+
+  // Displays only to watch tasks
+  $toWatchOnly.on('click', function() {
+    filter = 1;
+    loadTasks(filter);
+  });
+
+  // Displays only to eat tasks
+  $toEatOnly.on('click', function() {
+    filter = 2;
+    loadTasks(filter);
+  });
+
+  // Displays only to read tasks
+  $toReadOnly.on('click', function() {
+    filter = 3;
+    loadTasks(filter);
+  });
+
+  // Displays only to buy tasks
+  $toBuyOnly.on('click', function() {
+    filter = 4;
+    loadTasks(filter);
+  });
+
+  // Displays completed tasks only
+  $completedTasks.on('click', function() {
+    filter = 'completed';
+    loadTasks(filter);
+  });
+
+  // Creates the Task lists
+  const renderTasks = function(tasks, filter) {
+    let $tasks = '';
     $('.task-container').empty();
-    for (const data of tasks) {
-      let $tasks = createTaskElement(data);
-      $('.task-container').prepend($tasks);
+    // No filter | All tasks will be shown
+    if (!filter) {
+      for (const data of tasks) {
+        $tasks = createTaskElement(data);
+        $('.task-container').prepend($tasks);
+      }
+    // Populate Completed Tasks Only
+    } else if (filter === 'completed') {
+      for (const data of tasks) {
+        let completionStatus = data.task_status;
+        if (completionStatus) {
+          $tasks = createTaskElement(data);
+          $('.task-container').prepend($tasks);
+        }
+      }
+    // Populate tasks based off filter selected
+    } else {
+      for (const data of tasks) {
+        let taskCategory = data.category_id;
+        if (taskCategory === filter) {
+          $tasks = createTaskElement(data);
+          $('.task-container').prepend($tasks);
+        }
+      }
     }
   };
 
-  const loadTasks = function() {
+  const loadTasks = function(filter) {
     $.ajax({
       url: "/tasks",
       type: "GET",
       success: (tasks) => {
-        renderTasks(tasks);
+        renderTasks(tasks, filter);
       }
     });
   };
 
   loadTasks();
 });
-
-
-// We want to get the tasks data
-// from the db, and input it into a function that will create a template
-// have to loop over the db to get a template for each tasks.
