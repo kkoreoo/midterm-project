@@ -4,6 +4,6 @@ CREATE TABLE tasks(
   task_name VARCHAR(255) NOT NULL,
   task_status boolean DEFAULT false,
   email VARCHAR(255) NOT NULL,
-  catergory_id INTEGER REFERENCES categories(id)
+  category_id INTEGER REFERENCES categories(id)
 
 );

@@ -1,4 +1,4 @@
-INSERT INTO tasks (task_name, task_status, email, catergory_id) VALUES
+INSERT INTO tasks (task_name, task_status, email, category_id) VALUES
 ('Watch a movie', false, 'john@example.com', 1),          -- Film
 ('Read a novel', true, 'alice@example.com', 3),           -- Books
 ('Try a new recipe', false, 'bob@example.com', 2),        -- Foods

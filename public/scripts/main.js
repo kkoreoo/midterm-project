@@ -14,7 +14,7 @@ $(function() {
 
     const taskName = taskData.task_name;
     const taskStatus = taskData.task_status;
-    const category = taskData.catergory_id; // film=1, foods=2, books=3, products=4
+    const category = taskData.category_id; // film=1, foods=2, books=3, products=4
     let $task = ``;
 
     // Template for completed tasks
