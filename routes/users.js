@@ -47,7 +47,7 @@ router.get('/:id/edit', (req, res) => {
       }
 
       // Update the user's first name and last name
-      return userinfo.updateUser('Alex','Alex2');
+      return userinfo.updateUser(userId,'Yasin','Hussein');
     })
 
     .then((updatedUser) => {
