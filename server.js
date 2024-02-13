@@ -6,6 +6,9 @@ const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
 
+// Import the database connection
+const db = require('./db/connection');
+
 const PORT = process.env.PORT || 8080;
 const app = express();
 
@@ -48,6 +51,18 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
+// Example route to perform database operation
+app.get('/tasks', async (req, res) => {
+  try {
+    const result = await db.query('SELECT * FROM tasks');
+    res.json(result.rows);
+  } catch (err) {
+    console.error('Error executing query:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+

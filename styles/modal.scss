@@ -1,0 +1,73 @@
+#new-task-form{
+  display: none;
+}
+
+.modal{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 65%;
+  height: 20%;
+  transform: translate(-50%, -50%);
+  border: 1px solid black;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  background: lightgreen;
+  padding: 5px;
+  z-index: 10;
+}
+
+#overlay.active{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .65);
+}
+
+.modal button:hover{
+  cursor: pointer;
+}
+
+.modal .new-task-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.modal h1{
+  padding-left: 15px;
+}
+
+.modal .close-modal{
+  padding-right: 20px;
+  padding-top: 14px;
+}
+
+.modal .input-task-title{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.modal input{
+  width: 80%;
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+  font-family: "Raleway", sans-serif;
+}
+
+.modal .submit-new-task{
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 15px;
+  margin-top: 5px;
+}
+
+.modal .submit-new-task button{
+  font-family: "Raleway", sans-serif;
+}
+
+
