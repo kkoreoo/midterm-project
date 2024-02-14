@@ -1,4 +1,4 @@
-.tasks-list{
+.tasks-list {
   display: flex;
   flex-direction: rows;
   justify-content: space-between;
@@ -8,17 +8,17 @@
 
 }
 
-.tasks-list .task-content{
+.tasks-list .task-content {
   display: flex;
   margin: 0 3px;
   padding: 0px 30px;
 }
 
-.tasks-list .task-content i{
+.tasks-list .task-content i {
   padding: 0 6px;
 }
 
-.tasks-list .task-content i:hover{
+.tasks-list .task-content i:hover {
   box-shadow: 0 0px 11px yellow;
   cursor: pointer;
 }

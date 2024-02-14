@@ -20,11 +20,13 @@
 
   <!-- App CSS -->
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css">
-  <link rel="stylesheet" href="/vendor/noramlize-4.1.1.css" type="text/css">
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css">
   <link rel="stylesheet" href="/styles/main.css" type="text/css">
+  <link rel="stylesheet" href="/styles/header.css" type="text/css">
   <link rel="stylesheet" href="/styles/side-navbar.css" type="text/css">
   <link rel="stylesheet" href="/styles/tasks.css" type="text/css">
   <link rel="stylesheet" href="/styles/modal.css" type="text/css">
+
 
   <!-- App JS -->
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
@@ -59,7 +61,14 @@
     </div>
 
     <main class="content">
-      <header class="username"> Username <i class="fa-sharp fa-solid fa-angle-down"></i></header>
+      <ul class="username">
+        <li>
+          <a href='#'>Username <i class="fa-sharp fa-solid fa-angle-down"></i></a>
+          <ul class="username-dropdown">
+            <li><a href='#'>Edit Profile</a></li>
+          </ul>
+        </li>
+      </ul>
 
       <header class="list-header">
         My Tasks

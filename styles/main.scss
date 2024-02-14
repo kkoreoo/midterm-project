@@ -9,30 +9,17 @@ body {
   background: #f1e0c5;
 }
 
-.wrapper{
+.wrapper {
   display: flex;
   position: relative;
 }
 
-.wrapper .content{
+.wrapper .content {
   width: 100%;
   margin-left: 200px;
 }
 
-.wrapper .content .username{
-  padding: 20px;
-  background-color: #342a21;
-  display: flex;
-  justify-content: flex-end;
-  color: white;
-}
-
-.wrapper .content .username .fa-angle-down{
-  margin-left: 6px;
-  margin-top: 2px;
-}
-
-.wrapper .content .list-header{
+.wrapper .content .list-header {
   background-color: #c9b79c;
   display: flex;
   justify-content: space-between;

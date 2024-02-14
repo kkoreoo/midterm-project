@@ -1,0 +1,52 @@
+.wrapper .content ul {
+  list-style: none;
+  background: #22438C;
+}
+
+.wrapper .content ul li {
+  display: inline-block;
+  position: relative;
+}
+
+.wrapper .content ul li a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  font-size: 20px;
+}
+
+.wrapper .content ul li a:hover {
+  background: #112C66;
+}
+
+.wrapper .content ul li ul.username-dropdown li {
+  display: block;
+}
+
+.wrapper .content ul li ul.username-dropdown {
+  width: 100%;
+  background: #22438C;
+  position: absolute;
+  z-index: 999;
+  display: none;
+  padding: 0;
+}
+
+.wrapper .content ul li:hover ul.username-dropdown {
+  display: block;
+}
+
+.wrapper .content .username {
+  padding: 20px;
+  background-color: #342a21;
+  display: flex;
+  justify-content: flex-end;
+  color: white;
+  margin: 0;
+}
+
+.wrapper .content .username .fa-angle-down {
+  margin-left: 6px;
+  margin-top: 2px;
+}

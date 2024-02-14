@@ -1,8 +1,8 @@
-.wrapper .sidebar h1{
+.wrapper .sidebar h1 {
   font-family: "Protest Strike", sans-serif;
 }
 
-.wrapper .sidebar{
+.wrapper .sidebar {
   position: fixed;
   width: 200px;
   height: 100%;
@@ -10,13 +10,13 @@
   padding: 18px 0;
 }
 
-.wrapper .sidebar h1{
+.wrapper .sidebar h1 {
   color: white;
   text-align: center;
   margin-bottom: 25px;
 }
 
-.wrapper .sidebar ul{
+.wrapper .sidebar ul {
   padding-left: 5px;
 }
 
@@ -30,12 +30,12 @@
   padding-right: 8px;
 }
 
-.wrapper .sidebar ul li:hover{
+.wrapper .sidebar ul li:hover {
   cursor: pointer;
   background: #a9c7a3;
 }
 
-.wrapper .sidebar .filter-list{
+.wrapper .sidebar .filter-list {
   display: none;
 }
 
@@ -43,6 +43,6 @@
   padding-right: 8px;
 }
 
-.wrapper .sidebar .fa-circle-check{
+.wrapper .sidebar .fa-circle-check {
   color: green;
 }
