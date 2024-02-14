@@ -1,5 +1,9 @@
 .wrapper .sidebar h1 {
   font-family: "Protest Strike", sans-serif;
+  color: white;
+  text-align: center;
+  margin-bottom: 3px;
+
 }
 
 .wrapper .sidebar {
@@ -8,12 +12,7 @@
   height: 100%;
   background-color: #71816d;
   padding: 18px 0;
-}
-
-.wrapper .sidebar h1 {
-  color: white;
-  text-align: center;
-  margin-bottom: 25px;
+  font-weight: 500;
 }
 
 .wrapper .sidebar ul {
@@ -23,7 +22,7 @@
 .wrapper .sidebar ul li {
   list-style-type: none;
   padding: 15px;
-  border-bottom: 1px solid;
+  border-bottom: 1px solid #3c433a;
 }
 
 .wrapper .sidebar ul li span {
@@ -41,8 +40,4 @@
 
 .wrapper .sidebar i{
   padding-right: 8px;
-}
-
-.wrapper .sidebar .fa-circle-check {
-  color: green;
 }

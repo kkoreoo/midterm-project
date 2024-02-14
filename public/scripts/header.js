@@ -21,7 +21,7 @@ $(function() {
       <div class="email">
         <strong>Email:</strong><input placeholder="${email}"></input>
       </div>
-      <button id="edit-profile">Submit</button>
+      <button type="submit" id="edit-profile">Submit</button>
     </div>
     `;
     return template

@@ -43,26 +43,25 @@
 </head>
 
 <body>
-  <!-- Top Nav Bar (FIXED) -->
+  <!-- Side Nav Bar (FIXED) -->
   <div class="wrapper">
     <div class="sidebar">
       <h1>Smart To Do</h1>
       <ul>
-        <li><span>Create New List</span><i class="fa-solid fa-square-plus"></i></li>
-        <li><span>My List</span><i class="fa-sharp fa-solid fa-angle-down"></i></li>
         <li class="filter-tasks"><span>Filter By</span> <i class="fa-solid fa-list"></i></li>
         <div class="filter-list">
-          <li class="all-categories"><i class="fa-regular fa-square-check"></i> All</li>
+          <li class="all-categories"> <i class="fa-solid fa-brain"></i>All</li>
           <li class="to-watch"><i class="fa-solid fa-film"></i> Watch</li>
           <li class="to-eat"><i class="fa-solid fa-utensils"></i> Eat</li>
           <li class="to-read"><i class="fa-solid fa-book"></i> Read</li>
           <li class="to-buy"><i class="fa-solid fa-cart-shopping"></i> Buy</li>
           <li class="priority-tasks"><i class="fa-solid fa-flag"></i> Priority</li>
-          <li class="completed-tasks"><i class="fa-solid fa-circle-check"></i>Completed</li>
+          <li class="completed-tasks"><i class="fa-regular fa-square-check"></i></i>Completed</li>
         </div>
       </ul>
     </div>
 
+    <!-- Top Nav Bar (FIXED) -->
     <main class="content">
       <ul class="username">
         <li>
@@ -73,22 +72,28 @@
         </li>
       </ul>
 
+
+      <!-- Task List Header -->
       <header class="list-header">
         My Tasks
-        <span><button class="new-task"><i class="fa-solid fa-circle-plus"></i></button></span>
+        <span><button type="button" class="new-task"><i class="fa-solid fa-circle-plus"></i></button></span>
       </header>
 
+      <!-- CREATE new task modal -->
       <div id="overlay">
-      <section class="modal" id="new-task-form">
-        <header class="new-task-header">
-          <h1>Create A New Task</h1>
-          <div class="close-modal"><button>X</button></div>
-        </header>
-        <form class="input-task-title" id="post-task"><input placeholder="What task would you like to accomplish?"></input></form>
-        <div class="submit-new-task"><button>Submit</button></div>
-      </section>
-    </div>
+        <section class="modal" id="new-task-form">
+          <header class="new-task-header">
+            <h1>Create A New Task</h1>
+            <div class="close-modal"><button type="button"><i class="fa-regular fa-rectangle-xmark"></i></button></div>
+          </header>
+          <form class="input-task-title" id="post-task">
+            <input name="taskTitle" placeholder="What task would you like to accomplish?"></input>
+            <div class="submit-new-task"><button type="submit">Submit</button></div>
+          </form>
+        </section>
+      </div>
 
+      <!-- Container to hold all tasks -->
       <div class="task-container">
       </div>
 

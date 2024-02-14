@@ -24,8 +24,19 @@ body {
   display: flex;
   justify-content: space-between;
   padding: 25px;
+  font-weight: 700;
+  font-size: 20px;;
 }
 
+.wrapper .content .list-header button {
+  background: none;
+  border: none;
+}
+
+.wrapper .content .list-header i:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}
 
 
 

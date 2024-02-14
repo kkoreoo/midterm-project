@@ -80,13 +80,24 @@ $(function() {
     return $task;
   };
 
+  // Post request to DB with new task data
+  const $newTaskData = $('#post-task');
+
+  $newTaskData.on("submit", function(event) {
+    event.preventDefault();
+
+    const data = $(this).serialize();
+    console.log('task data', data);
+  });
+
+
   // Assignment of filter buttons
   const $allCategories = $('.all-categories');
   const $toWatchOnly = $('.to-watch');
   const $toEatOnly = $('.to-eat');
   const $toReadOnly = $('.to-read');
   const $toBuyOnly = $('.to-buy');
-  const $prorityTasks = $('.priority-tasks');
+  // const $prorityTasks = $('.priority-tasks');
   const $completedTasks = $('.completed-tasks');
   let filter = null;
 
@@ -157,6 +168,7 @@ $(function() {
     }
   };
 
+  // Dynamically displays tasks
   const loadTasks = function(filter) {
     $.ajax({
       url: "/tasks",

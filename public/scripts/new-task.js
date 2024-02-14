@@ -19,4 +19,11 @@ $(function() {
     }
   });
 
+  // Closes modal if clicked outside of modal
+  // $('body').on('click', function(event) {
+  //   if ($newTaskForm.css('display') != 'none') {
+  //     $newTaskForm.hide();
+  //     $overlay.removeClass('active');
+  //   }
+  // });
 });
