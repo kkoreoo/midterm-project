@@ -60,7 +60,6 @@
 
   module.exports = {
     getUsers, getOnlyOneUser,updateUser,
-    getTasksForUser, getListById,
-    editList, editTask,
+    getTasksForUser, editTask,
     addTask
   };
