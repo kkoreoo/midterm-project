@@ -3,7 +3,7 @@ $(function() {
   const $createNewTaskButton = $('.new-task');
   const $newTaskForm = $('#new-task-form');
   const $closeModal = $('.close-modal');
-  const $overlay = $('#overlay');
+  const $overlay = $('.overlay');
 
   // Displays new task modal
   $createNewTaskButton.on('click', function (event) {

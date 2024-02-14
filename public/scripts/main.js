@@ -188,4 +188,19 @@ $(function() {
     //ajax post request to update task status
   });
 
+  const editTask = function() {
+    const template =`
+    <div class="overlay">
+      <section class="modal" id="edit-task">
+      </section>
+    </div>
+
+    `;
+  };
+
+  // Displays Edit Task Modal
+  $(document).on('click', '.task-edit', function() {
+    console.log('edit button clicked');
+  });
+
 });

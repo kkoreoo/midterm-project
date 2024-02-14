@@ -7,7 +7,7 @@
   top: 50%;
   left: 50%;
   width: 50%;
-  height: 25%;
+  height: 20%;
   transform: translate(-50%, -50%);
   border: 1px solid black;
   border-radius: 8px;
@@ -18,7 +18,7 @@
   z-index: 10;
 }
 
-#overlay.active {
+.overlay.active {
   position: fixed;
   top: 0;
   left: 0;
@@ -39,6 +39,7 @@
 
 .modal h1 {
   padding-left: 15px;
+  font-size: 25px;
 }
 
 .modal .close-modal {
