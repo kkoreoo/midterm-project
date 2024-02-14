@@ -172,6 +172,8 @@ $(function() {
   //Updates database that a task is completed
   $(document).on('click', '.task-complete', function(event) {
     console.log('event details', event);
+
+    //ajax post request to update task status
   });
 
 });
