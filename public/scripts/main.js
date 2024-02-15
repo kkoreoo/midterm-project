@@ -14,6 +14,8 @@ $(function() {
   //Create the HTML elements for each task
   const createTaskElement = function(taskData) {
 
+    const taskId = taskData.id;
+    console.log(taskId);
     const taskName = taskData.task_name;
     const taskStatus = taskData.task_status;
     const category = taskData.category_id; // film=1, foods=2, books=3, products=4
@@ -46,13 +48,12 @@ $(function() {
 
       <span class="task-content">
         <div class="task-complete is-completed"><i class="fa-solid fa-square-check"></i></div>
-        <div class="task-name">${escape(taskName)}</div>
+        <div class="task-name ${taskId}">${escape(taskName)}</div>
       </span>
 
       <span class="task-content">
-        <div class="task-priority"><i class="fa-solid fa-flag"></i></div>
-        <div class="task-edit"><i class="fa-solid fa-pen-to-square"></i></div>
-        <div class="task-delete"><i class="fa-solid fa-trash-can"></i></div>
+        <div class="task-edit ${taskId}"><i class="fa-solid fa-pen-to-square"></i></div>
+        <div class="task-delete ${taskId}"><i class="fa-solid fa-trash-can"></i></div>
       </span>
 
       </article>
@@ -64,14 +65,13 @@ $(function() {
       <div class="task-icon">${categoryIcon}</div>
 
       <span class="task-content">
-        <div class="task-complete"><i class="fa-regular fa-square"></i></div>
-        <div class="task-name">${escape(taskName)}</div>
+        <div class="task-complete ${taskId}"><i class="fa-regular fa-square"></i></div>
+        <div class="task-name ${taskId}">${escape(taskName)}</div>
       </span>
 
       <span class="task-content">
-        <div class="task-priority"><i class="fa-solid fa-flag"></i></div>
-        <div class="task-edit"><i class="fa-solid fa-pen-to-square"></i></div>
-        <div class="task-delete"><i class="fa-solid fa-trash-can"></i></div>
+        <div class="task-edit ${taskId}"><i class="fa-solid fa-pen-to-square"></i></div>
+        <div class="task-delete ${taskId}"><i class="fa-solid fa-trash-can"></i></div>
       </span>
 
       </article>
@@ -86,7 +86,7 @@ $(function() {
   $newTaskData.on("submit", function(event) {
     event.preventDefault();
 
-    const data = $(this).serialize().split('=')[1];
+    const data = $(this).serialize();
 
     if (data.length !== 0) {
       $.ajax({
@@ -94,11 +94,11 @@ $(function() {
         type: "POST",
         data,
         success: () => {
-          loadTasks();
+          // loadTasks();
+          // need to reload dom.
         }
-      })
+      });
     }
-    console.log('task data', data);
   });
 
 
@@ -116,7 +116,7 @@ $(function() {
   $allCategories.on('click', function() {
     filter = null;
     loadTasks(filter);
-  })
+  });
 
   // Displays only to watch tasks
   $toWatchOnly.on('click', function() {
@@ -158,7 +158,7 @@ $(function() {
         $tasks = createTaskElement(data);
         $('.task-container').prepend($tasks);
       }
-    // Populate Completed Tasks Only
+      // Populate Completed Tasks Only
     } else if (filter === 'completed') {
       for (const data of tasks) {
         let completionStatus = data.task_status;
@@ -167,7 +167,7 @@ $(function() {
           $('.task-container').prepend($tasks);
         }
       }
-    // Populate tasks based off filter selected
+      // Populate tasks based off filter selected
     } else {
       for (const data of tasks) {
         let taskCategory = data.category_id;
@@ -200,7 +200,7 @@ $(function() {
   });
 
   const editTask = function() {
-    const template =`
+    const template = `
     <div class="overlay">
       <section class="modal" id="edit-task">
 
@@ -216,17 +216,20 @@ $(function() {
   });
 
   // Deletes Task
-  $(document).on('click', '.task-delete', function() {
+  $(document).on('click', '.task-delete', function(event) {
+    const data = $(event.currentTarget).attr('class').split(' ')[1];
+    console.log(data);
     const confirmDelete = confirm("Are you sure you want to delete this task?");
 
     if (confirmDelete) {
       $.ajax({
-        url:"/users/1/tasks/delete",
+        url: "/users/1/tasks/delete",
         type: "POST",
+        data,
         success: () => {
-          console.log('successfully deleted a task');
+          loadTasks();
         }
-      })
+      });
     }
   });
 

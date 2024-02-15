@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
   })
 });
 
-// READ - Sends client a user's info 
+// READ - Sends client a user's info
 router.get('/:id', (req, res) => {
   const userId = req.params.id
   userinfo.getOnlyOneUser(userId)
@@ -92,13 +92,13 @@ router.get('/:id/tasks/edit', (req, res) => {
 //will change  router.get to router.post later on
 //Add a new task to the the tasks table
 
-router.get ('/:id/tasks/add', (req, res) => {
-  const userId = req.params.id;
-  // const taskId = req.params.idTasks;
-  // const taskName = req.body.taskName;
+router.post('/:id/tasks/', (req, res) => {
+  const taskName = req.body.taskTitle;
   // const category = req.body.category;
+  console.log('req', req.body);
+  console.log('task', taskName);
 
-  userinfo.addTask('watch money heist 3', false, 4)
+  userinfo.addTask(taskName, false, 4)
     .then((result) => {
       if (result.rows.length === 0) {
         return res.status(500).json({ error: 'Error adding task' });
@@ -107,17 +107,15 @@ router.get ('/:id/tasks/add', (req, res) => {
       // res.json(addTask.rows);
      });
 });
-//Delete  a task
-//will change router.get to router.post
-router.get ('/:id/tasks/delete', (req, res) => {
-  const taskId = req.params.id;
+//Delete a task
+router.post('/:id/tasks/delete', (req, res) => {
+  const taskId = Object.keys(req.body)[0];
   userinfo.deleteTask(taskId)
     .then((result) => {
       if (result.rows.length === 0) {
         res.status(200).json({ message: 'Task deleted successfully.' });
       }
-     })
-
+     });
 });
 
 module.exports = router;
