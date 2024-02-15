@@ -10,9 +10,9 @@ const db = require('../db/connection');
 const express = require('express');
 const router  = express.Router();
 const userinfo = require('../db/queries/users');
+const categorize = require('../categorize');
 
 //ROUTES
-
 router.get('/', (req, res) => {
   userinfo.getUsers()
   .then((result)=>{
@@ -85,8 +85,6 @@ router.get ('/:id/tasks/add', (req, res) => {
   const userId = req.params.id;
   // const taskId = req.params.idTasks;
   // const taskName = req.body.taskName;
-  // const category = req.body.category;
-
   userinfo.addTask('Game of thrones ', false, 4)
     .then((result) => {
       if (result.rows.length === 0) {

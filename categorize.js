@@ -5,8 +5,7 @@ const keywordsToEat = ['eat', 'food', 'recipe', 'restaurant', 'cafe', 'meat', 'v
 const keywordsToRead = ['read', 'book', 'journal', 'novel', 'newspaper', 'textbook'];
 const keywordsToBuy = ['buy', 'store', 'retail', 'purchase'];
 const dictionary = [keywordsToWatch, keywordsToEat, keywordsToRead, keywordsToBuy];
-const categories = ['Film / Series (To watch)','Restaurants, cafes, etc. (To eat)',
-'Books (To read)','Products (To buy)'];
+const categories = ['watch','eat','read', 'buy'];
 
 // if taskString has .includes() any of the keywords, we can automatically categorize,
 // else call apis, using promise.all,
@@ -28,6 +27,8 @@ const categorizeTask = function(){
         return categories[i];
    }
 }
-}
+
+};
+module.exports = categorizeTask;
 
 
