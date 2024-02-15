@@ -9,6 +9,7 @@ const categories = ['watch','eat','read', 'buy'];
 
 // if taskString has .includes() any of the keywords, we can automatically categorize,
 // else call apis, using promise.all,
+
 //the taskString value will be received dynamically from the user
 let taskString = "buy a laptop";
 //Convert to lowerCase in case upperCase text is provided

@@ -38,15 +38,15 @@
     return db.query(query, [userId]);
   };
 
-    // EDIT - Edit task
-  const  editTask = (userId, newTaskName) => {
+    // EDIT - Edit taskCategory
+  const  editTaskCategory = (taskId, newCategoryName) => {
       const query = `
         UPDATE tasks
-        SET task_name = $1
+        SET category_name = $1
         WHERE id = $2
         RETURNING *;
       `;
-      return db.query(query, [newTaskName,userId]);
+      return db.query(query, [newCategoryName,taskId]);
     };
     //Insert new tasks to the tasks table
     const addTask = (taskName,taskStatuts,category_name) => {
@@ -69,7 +69,7 @@
     getOnlyOneUser,
     updateUser,
     getTasksForUser,
-    editTask,
+    editTaskCategory,
     addTask,
     deleteTask
   };
