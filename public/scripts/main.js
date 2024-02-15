@@ -15,7 +15,6 @@ $(function() {
   const createTaskElement = function(taskData) {
 
     const taskId = taskData.id;
-    console.log(taskId);
     const taskName = taskData.task_name;
     const taskStatus = taskData.task_status;
     const category = taskData.category_name;
@@ -44,25 +43,34 @@ $(function() {
     if (taskStatus) {
       $task = `
       <article class="tasks-list">
-      <div class="task-icon">${categoryIcon}</div>
+        <span class="task-icon">
+          <div class="task-icon ${category}">${categoryIcon}</div>
+          <div class="task-icon hidden-icon-true ${category}">${categoryIcon}</div>
+          <div class="task-icon hidden-icon-true ${category}">${categoryIcon}</div>
+          <div class="task-icon hidden-icon-true ${category}">${categoryIcon}</div>
+        </span>
 
-      <span class="task-content">
-        <div class="task-complete is-completed"><i class="fa-solid fa-square-check"></i></div>
-        <div class="task-name ${taskId}">${escape(taskName)}</div>
-      </span>
+        <span class="task-content">
+          <div class="task-complete is-completed"><i class="fa-solid fa-square-check"></i></div>
+          <div class="task-name ${taskId}">${escape(taskName)}</div>
+        </span>
 
-      <span class="task-content">
-        <div class="task-edit ${taskId}"><i class="fa-solid fa-pen-to-square"></i></div>
-        <div class="task-delete ${taskId}"><i class="fa-solid fa-trash-can"></i></div>
-      </span>
-
+        <span class="task-content">
+          <div class="task-edit ${taskId}"><i class="fa-solid fa-pen-to-square"></i></div>
+          <div class="task-delete ${taskId}"><i class="fa-solid fa-trash-can"></i></div>
+        </span>
       </article>
       `;
       // Template for incomplete tasks
     } else {
       $task = `
       <article class="tasks-list">
-      <div class="task-icon">${categoryIcon}</div>
+      <span class="task-icon">
+        <div class="task-icon ${category}">${categoryIcon}</div>
+        <div class="task-icon hidden-icon-true ${category}">${categoryIcon}</div>
+        <div class="task-icon hidden-icon-true ${category}">${categoryIcon}</div>
+        <div class="task-icon hidden-icon-true ${category}">${categoryIcon}</div>
+      </span>
 
       <span class="task-content">
         <div class="task-complete ${taskId}"><i class="fa-regular fa-square"></i></div>
@@ -190,40 +198,21 @@ $(function() {
     });
   };
 
+  // Loads page every time '/' is visited
   loadTasks();
 
-  //Updates database that a task is completed
+  // Updates database that a task is completed
   $(document).on('click', '.task-complete', function(event) {
     console.log('event details', event);
 
     //ajax post request to update task status
   });
 
-  const editTask = function() {
-    const categoryIcon = ''
-    const template = `
-    <div class="overlay">
-    <section class="modal" id="edit-task-form">
-      <header class="edit-task-header">
-        <h1>Edit Task</h1>
-        <div class="close-modal"><button type="button"><i class="fa-regular fa-rectangle-xmark"></i></button></div>
-      </header>
-      <form class="input-task-title" id="post-task">
-        <div class="task-icon">${categoryIcon}</div>
-        <input name="taskTitle" placeholder="What task would you like to accomplish?"></input>
-        <div class="submit-new-task"><button type="submit">Submit</button></div>
-      </form>
-    </section>
-  </div>
-
-    `;
-    return template;
-  };
-
-  // Displays Edit Task Modal
-  $(document).on('click', '.task-edit', function() {
-    console.log('edit button clicked');
+  // Change category if user believes it is miscategorized
+  $(document).on('click', '.task-icon', function() {
+    console.log('hello icon clicked');
   });
+
 
   // Deletes Task
   $(document).on('click', '.task-delete', function(event) {

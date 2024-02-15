@@ -5,7 +5,21 @@
   padding: 15px;
   border: 4px solid;
   margin: 10px;
+}
 
+.task-icon {
+  display: flex;
+  flex-direction: rows;
+  margin-right: 7px;
+}
+
+.task-icon i:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.hidden-icon-true {
+  display: none;
 }
 
 .tasks-list .task-content {

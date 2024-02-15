@@ -1,6 +1,7 @@
 const axios = require('axios');
 require('dotenv').config();
 
+
 // Request to Google Books
 const checkGoogleBooks = (taskString) => {
   axios.get(`https://www.googleapis.com/books/v1/volumes?q=${taskString}&key=${process.env.GOOGLE_API}`)
@@ -8,7 +9,6 @@ const checkGoogleBooks = (taskString) => {
     if (data.data.totalItems !== 0) {
       return true;
     } else {
-      console.log('hello');
       return null;
     }
   })
@@ -25,7 +25,7 @@ const checkYelp = (taskString, city) => {
     params: {
       term: `${taskString}`,
       location: city,
-      categories: 'food&categories=resturant',
+      categories: 'food,restaruant,cafes',
       sort_by: 'best_match',
       limit: '20'
     },
@@ -34,13 +34,18 @@ const checkYelp = (taskString, city) => {
 
   axios.request(options)
     .then(function (response) {
-      console.log('success', response.data);
-      console.log(response.data.businesses[0].categories);
+      if (response.data.total !== 0){
+        return true;
+      } else {
+        return null;
+      }
     })
     .catch(function (error) {
       console.error('error msg:', error.response);
     });
 };
+
+checkYelp('orange', 'edmonton');
 
 const checkMovieDB = function(taskString) {
   const options = {

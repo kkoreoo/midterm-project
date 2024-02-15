@@ -49,13 +49,13 @@
       return db.query(query, [newTaskName,userId]);
     };
     //Insert new tasks to the tasks table
-    const addTask = (taskName,taskStatuts,category_id) => {
+    const addTask = (taskName,taskStatuts,category_name) => {
       const query = `
-        INSERT INTO tasks (task_name,task_status,category_id)
+        INSERT INTO tasks (task_name,task_status,category_name)
         VALUES ($1, $2, $3)
         RETURNING *;
       `;
-      return db.query(query, [taskName,taskStatuts,category_id]);
+      return db.query(query, [taskName,taskStatuts,category_name]);
     };
     const deleteTask = (taskId)=>{
       const deletequery = `
