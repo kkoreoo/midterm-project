@@ -11,16 +11,19 @@ const categories = ['watch','eat','read', 'buy'];
 // else call apis, using promise.all,
 
 //the taskString value will be received dynamically from the user
-let taskString = "buy a laptop";
+let taskString = "Watch movie";
 //Convert to lowerCase in case upperCase text is provided
 let result = taskString.toLowerCase();
 //split the taskString and store result varaible
 const task = result.split(' ');
+
 const categorizeTask = function(){
+
   for (let i in dictionary) {
 
     const categoryKeywords = dictionary[i];
 
+    //filter if categorykeywords are present in the in the user input
     const matchingKeywords = categoryKeywords.filter(keyword => task.includes(keyword));
 
     if (matchingKeywords.length > 0) {

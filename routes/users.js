@@ -10,8 +10,7 @@ const db = require('../db/connection');
 const express = require('express');
 const router  = express.Router();
 const userinfo = require('../db/queries/users');
-const categorize = require('../categorize');
-
+const categorizeTask = require('../categorize');
 //ROUTES
 router.get('/', (req, res) => {
   userinfo.getUsers()
@@ -36,14 +35,19 @@ router.get('/:id', (req, res) => {
 
 // EDIT - Updates user info in DB
 router.post('/:id/edit', (req, res) => {
+
   const userId = req.params.id;
+
   const {firstName, lastName} = req.body;
 
   // Update the user's first name and last name
+
   userinfo.updateUser(userId, firstName,lastName)
+
     .then((updatedUser) => {
 
       if (updatedUser.rows.length === 0) {
+
         return res.status(500).send('Error updating user');
       }
 
@@ -69,12 +73,20 @@ router.get('/:id/tasks', (req, res) => {
 
 // will change this to post to make a post requet
 //Edit an existing task category in the tasks table
+
 router.get('/:id/taskscategory/edit', (req, res) => {
+//place holder
+  
   const taskId = req.params.id;
-  // const newTaskName = req.body.newTaskName;
-  userinfo.editTaskCategory(taskId,'watch')
+
+  const taskCategory = categorizeTask();
+
+
+  userinfo.editTaskCategory(taskId,taskCategory)
+
   .then((result) => {
     if (result.rows.length === 0) {
+
       return res.status(404).send('Task not found');
     }
     res.json(result.rows);
