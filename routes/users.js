@@ -68,11 +68,11 @@ router.get('/:id/tasks', (req, res) => {
 });
 
 // will change this to post to make a post requet
-//Edit an existing task in the tasks table
-router.get('/:id/tasks/edit', (req, res) => {
-  const userId = req.params.id;
+//Edit an existing task category in the tasks table
+router.get('/:id/taskscategory/edit', (req, res) => {
+  const taskId = req.params.id;
   // const newTaskName = req.body.newTaskName;
-  userinfo.editTask(userId,'Watch a film')
+  userinfo.editTaskCategory(taskId,'watch')
   .then((result) => {
     if (result.rows.length === 0) {
       return res.status(404).send('Task not found');
