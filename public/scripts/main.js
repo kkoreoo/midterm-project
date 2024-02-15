@@ -18,23 +18,23 @@ $(function() {
     console.log(taskId);
     const taskName = taskData.task_name;
     const taskStatus = taskData.task_status;
-    const category = taskData.category_id; // film=1, foods=2, books=3, products=4
+    const category = taskData.category_name;
     let categoryIcon = '';
 
     // Film Icon
-    if (category === 1) {
+    if (category === 'watch') {
       categoryIcon = '<i class="fa-solid fa-film"></i>';
 
       // Foods Icon
-    } else if (category === 2) {
+    } else if (category === 'eat') {
       categoryIcon = '<i class="fa-solid fa-utensils"></i>';
 
       // Books Icon
-    } else if (category === 3) {
+    } else if (category === 'read') {
       categoryIcon = '<i class="fa-solid fa-book"></i>';
 
       // Products Icon
-    } else if (category == 4) {
+    } else if (category == 'buy') {
       categoryIcon = '<i class="fa-solid fa-cart-shopping"></i>';
     }
 
@@ -200,14 +200,24 @@ $(function() {
   });
 
   const editTask = function() {
+    const categoryIcon = ''
     const template = `
     <div class="overlay">
-      <section class="modal" id="edit-task">
-
-      </section>
-    </div>
+    <section class="modal" id="edit-task-form">
+      <header class="edit-task-header">
+        <h1>Edit Task</h1>
+        <div class="close-modal"><button type="button"><i class="fa-regular fa-rectangle-xmark"></i></button></div>
+      </header>
+      <form class="input-task-title" id="post-task">
+        <div class="task-icon">${categoryIcon}</div>
+        <input name="taskTitle" placeholder="What task would you like to accomplish?"></input>
+        <div class="submit-new-task"><button type="submit">Submit</button></div>
+      </form>
+    </section>
+  </div>
 
     `;
+    return template;
   };
 
   // Displays Edit Task Modal
