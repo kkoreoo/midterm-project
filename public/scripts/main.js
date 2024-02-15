@@ -102,8 +102,15 @@ $(function() {
         type: "POST",
         data,
         success: () => {
-          // loadTasks();
-          // need to reload dom.
+          const $overlay = $('.overlay');
+          const $newTaskForm = $('#new-task-form');
+          console.log($newTaskForm.css('display'));
+
+          if ($newTaskForm.css('display') != 'none') {
+            $newTaskForm.hide();
+            $overlay.removeClass('active');
+          }
+          loadTasks();
         }
       });
     }

@@ -10,7 +10,7 @@ const db = require('../db/connection');
 const express = require('express');
 const router  = express.Router();
 const userinfo = require('../db/queries/users');
-const categorize = require('../categorize');
+const { checkOpenAi } = require('../api-calls');
 
 //ROUTES
 router.get('/', (req, res) => {
@@ -85,15 +85,21 @@ router.get('/:id/tasks/edit', (req, res) => {
 //Add a new task to the the tasks table
 router.post('/:id/tasks/', (req, res) => {
   const taskName = req.body.taskTitle;
-  // const category = req.body.category; WILL call categorize function
-
-  userinfo.addTask(taskName, false, 'watch')
-    .then((result) => {
-      if (result.rows.length === 0) {
-        return res.status(500).json({ error: 'Error adding task' });
+  checkOpenAi(taskName)
+    .then((category) => {
+      if (category) {
+        userinfo.addTask(taskName, false, category)
+      } else {
+        console.log('null object');
       }
-      res.json(result.rows);
-     });
+    })
+    .then(() => {
+      console.log('successfully added to db');
+      res.status(200).end();
+    })
+    .catch(error => {
+      console.log('error', error);
+    });
 });
 
 //Delete a task
