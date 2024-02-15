@@ -54,7 +54,6 @@ $(function() {
 
   // POST - Submits new user data to update user's info in DB
   $(document).on('submit', '.edit-container', function(event) {
-    const state = { page_id: 2, user_id: 1 };
     event.preventDefault();
 
     const $firstNameInput = $('#first').serialize().split('=')[1];

@@ -86,7 +86,18 @@ $(function() {
   $newTaskData.on("submit", function(event) {
     event.preventDefault();
 
-    const data = $(this).serialize();
+    const data = $(this).serialize().split('=')[1];
+
+    if (data.length !== 0) {
+      $.ajax({
+        url: "/users/1/tasks/",
+        type: "POST",
+        data,
+        success: () => {
+          loadTasks();
+        }
+      })
+    }
     console.log('task data', data);
   });
 
@@ -192,6 +203,7 @@ $(function() {
     const template =`
     <div class="overlay">
       <section class="modal" id="edit-task">
+
       </section>
     </div>
 
@@ -201,6 +213,21 @@ $(function() {
   // Displays Edit Task Modal
   $(document).on('click', '.task-edit', function() {
     console.log('edit button clicked');
+  });
+
+  // Deletes Task
+  $(document).on('click', '.task-delete', function() {
+    const confirmDelete = confirm("Are you sure you want to delete this task?");
+
+    if (confirmDelete) {
+      $.ajax({
+        url:"/users/1/tasks/delete",
+        type: "POST",
+        success: () => {
+          console.log('successfully deleted a task');
+        }
+      })
+    }
   });
 
 });
