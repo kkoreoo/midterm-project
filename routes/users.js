@@ -16,14 +16,12 @@ const userinfo = require('../db/queries/users');
 router.get('/', (req, res) => {
   userinfo.getUsers()
   .then((result)=>{
-    // const templateVariables = {
 
-    //   users:result.rows,
-    // };
-    // res.render('users',templateVariables);
     res.json(result.rows);
   })
 });
+
+// READ - Sends client a user's info 
 router.get('/:id', (req, res) => {
   const userId = req.params.id
   userinfo.getOnlyOneUser(userId)
@@ -31,43 +29,24 @@ router.get('/:id', (req, res) => {
     if (result.rows.length === 0) {
       res.status(404).send('User not found');
     }
-    // const templateVariables = {
-    //   users:result.rows
-    // };
-    // res.render('users',templateVariables);
+
     res.json(result.rows);
   })
 });
 
-// will change  to change this to post to make a post requet
-router.get('/:id/edit', (req, res) => {
+// EDIT - Updates user info in DB
+router.post('/:id/edit', (req, res) => {
   const userId = req.params.id;
-  // const newFirstName = req.body.newFirstName;
-  // const newLastName = req.body.newLastName;
+  const {firstName, lastName} = req.body;
 
-  // Fetch the current user information
-  userinfo.getOnlyOneUser(userId)
-    .then((result) => {
-      if (result.rows.length === 0) {
-        return res.status(404).send('User not found');
-      }
-
-      // Update the user's first name and last name
-      return userinfo.updateUser(userId,'Yasin','Hussein');
-    })
-
+  // Update the user's first name and last name
+  userinfo.updateUser(userId, firstName,lastName)
     .then((updatedUser) => {
-      // Check if a user was updated
-      console.log('updatedUser',updatedUser);
+
       if (updatedUser.rows.length === 0) {
         return res.status(500).send('Error updating user');
       }
-      // const templateVariables = {
-      //   users: updatedUser.rows,
-      //   message: 'User information updated successfully',
-      // };
-      // console.log(templateVariables);
-      // res.render('users', templateVariables);
+
       res.json(updatedUser.rows);
     });
 });

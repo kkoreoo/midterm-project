@@ -67,5 +67,9 @@
   module.exports = {
     getUsers, getOnlyOneUser,updateUser,
     getTasksForUser, editTask,
+<<<<<<< HEAD
     addTask,deleteTask
+=======
+    addTask
+>>>>>>> 14d4edcc07517bffe72cc7a5da75ef84980607c8
   };
