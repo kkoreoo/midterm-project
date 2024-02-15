@@ -95,24 +95,29 @@ router.get('/:id/tasks/edit', (req, res) => {
 router.get ('/:id/tasks/add', (req, res) => {
   const userId = req.params.id;
   // const taskId = req.params.idTasks;
-  const taskName = req.body.taskName;
-  const category = req.body.category;
+  // const taskName = req.body.taskName;
+  // const category = req.body.category;
 
-  userinfo.addTask(userId, taskName, category)
+  userinfo.addTask('watch money heist 3', false, 4)
     .then((result) => {
       if (result.rows.length === 0) {
         return res.status(500).json({ error: 'Error adding task' });
       }
-      return userinfo.addTask('watch money heist',false);
-     })
-     .then((addTask) => {
-
-      // Check if a user was not updated
-      if (addTask.rows.length === 0) {
-        return res.status(500).send('Error inserting tastk');
+      // return userinfo.addTask('watch money heist 3',false,3);
+      // res.json(addTask.rows);
+     });
+});
+//Delete  a task
+//will change router.get to router.post
+router.get ('/:id/tasks/delete', (req, res) => {
+  const taskId = req.params.id;
+  userinfo.deleteTask(taskId)
+    .then((result) => {
+      if (result.rows.length === 0) {
+        res.status(200).json({ message: 'Task deleted successfully.' });
       }
-      res.json(addTask.rows);
-    });
+     })
+
 });
 
 module.exports = router;

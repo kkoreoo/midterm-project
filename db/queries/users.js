@@ -57,9 +57,19 @@
       `;
       return db.query(query, [taskName,taskStatuts,category_id]);
     };
+    const deleteTask = (taskId)=>{
+      const deletequery = `
+      DELETE FROM tasks WHERE id = $1;
+      `;
+      return db.query(deletequery,[taskId]);
+    };
 
   module.exports = {
     getUsers, getOnlyOneUser,updateUser,
     getTasksForUser, editTask,
+<<<<<<< HEAD
+    addTask,deleteTask
+=======
     addTask
+>>>>>>> 14d4edcc07517bffe72cc7a5da75ef84980607c8
   };
