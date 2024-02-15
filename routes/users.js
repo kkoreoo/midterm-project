@@ -10,19 +10,20 @@ const db = require('../db/connection');
 const express = require('express');
 const router  = express.Router();
 const userinfo = require('../db/queries/users');
-const categorizeTask = require('../categorize');
+const { checkOpenAi } = require('../api-calls');
+
 //ROUTES
 router.get('/', (req, res) => {
   userinfo.getUsers()
   .then((result)=>{
 
     res.json(result.rows);
-  })
+  });
 });
 
 // READ - Sends client a user's info
 router.get('/:id', (req, res) => {
-  const userId = req.params.id
+  const userId = req.params.id;
   userinfo.getOnlyOneUser(userId)
   .then((result)=>{
     if (result.rows.length === 0) {
@@ -30,7 +31,7 @@ router.get('/:id', (req, res) => {
     }
 
     res.json(result.rows);
-  })
+  });
 });
 
 // EDIT - Updates user info in DB
@@ -68,7 +69,7 @@ router.get('/:id/tasks', (req, res) => {
       return;
     }
     res.json(result.rows);
-  })
+  });
 });
 
 // will change this to post to make a post requet
@@ -76,7 +77,7 @@ router.get('/:id/tasks', (req, res) => {
 
 router.get('/:id/taskscategory/edit', (req, res) => {
 //place holder
-  
+
   const taskId = req.params.id;
 
   const taskCategory = categorizeTask();
@@ -97,15 +98,21 @@ router.get('/:id/taskscategory/edit', (req, res) => {
 //Add a new task to the the tasks table
 router.post('/:id/tasks/', (req, res) => {
   const taskName = req.body.taskTitle;
-  // const category = req.body.category; WILL call categorize function
-
-  userinfo.addTask(taskName, false, 'watch')
-    .then((result) => {
-      if (result.rows.length === 0) {
-        return res.status(500).json({ error: 'Error adding task' });
+  checkOpenAi(taskName)
+    .then((category) => {
+      if (category) {
+        userinfo.addTask(taskName, false, category);
+      } else {
+        console.log('null object');
       }
-      res.json(result.rows);
-     });
+    })
+    .then(() => {
+      console.log('successfully added to db');
+      res.status(200).end();
+    })
+    .catch(error => {
+      console.log('error', error);
+    });
 });
 
 //Delete a task

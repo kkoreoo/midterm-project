@@ -1,73 +1,49 @@
 const axios = require('axios');
+
 require('dotenv').config();
 
+const checkOpenAi = function(taskString) {
+  const task = taskString.replace("%20", " ");
 
-// Request to Google Books
-const checkGoogleBooks = (taskString) => {
-  axios.get(`https://www.googleapis.com/books/v1/volumes?q=${taskString}&key=${process.env.GOOGLE_API}`)
-  .then((data) => {
-    if (data.data.totalItems !== 0) {
-      return true;
-    } else {
-      return null;
-    }
-  })
-  .catch((error) => {
-    console.log('error msg:', error.response);
-  });
-};
+  const prompt = `
+  Prompt: Categorize the following task into "to watch", "to read", "to eat" or "to buy" and respond only with the category.
+  Input: "${task}"
+  Category:
+  `;
 
-// need to figure out how to find location or we hard code it.
-const checkYelp = (taskString, city) => {
-  const options = {
-    method: 'GET',
-    url: 'https://api.yelp.com/v3/businesses/search',
-    params: {
-      term: `${taskString}`,
-      location: city,
-      categories: 'food,restaruant,cafes',
-      sort_by: 'best_match',
-      limit: '20'
-    },
-    headers: {accept: 'application/json', Authorization: `Bearer ${process.env.YELP_API}`}
+  const conversation = [
+    { role: 'system', content: "You've come to the right place! I'm here to help you categorize tasks into 'to watch,' 'to read,' 'to eat,' or 'to buy.' Please provide the task you'd like to categorize." },
+    { role: 'user', content: prompt },
+  ]
+
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${process.env.AI_API}`
   };
 
-  axios.request(options)
-    .then(function (response) {
-      if (response.data.total !== 0){
-        return true;
+  const payload = {
+    messages: conversation,
+    max_tokens: 5000,
+    model: "gpt-3.5-turbo-16k"
+  };
+
+  return axios.post('https://api.openai.com/v1/chat/completions', payload, {headers: headers})
+    .then(response => {
+      let result = response.data.choices[0].message.content.trim().toLowerCase();
+      result = result.split(' ');
+      const category = result[1];
+      const validCategories = ["watch", "eat", "read", "buy"];
+
+      if (validCategories.includes(category)) {
+        return category;
       } else {
         return null;
       }
     })
-    .catch(function (error) {
-      console.error('error msg:', error.response);
+    .catch(error => {
+      console.log("Error", error.response ? error.response.data : error.message);
     });
 };
 
-checkYelp('orange', 'edmonton');
-
-const checkMovieDB = function(taskString) {
-  const options = {
-    method: 'GET',
-    url: `https://api.themoviedb.org/3/search/movie?query=${taskString}&include_adult=false&language=en-US&page=1`,
-    headers: {accept: 'application/json', Authorization: `Bearer ${process.env.MOVIE_API}`}
-  };
-
-  axios.request(options)
-  .then(function (response) {
-    if (response.data.total_results !== 0){
-      console.log('success', response.data);
-      return true;
-    } else {
-      console.log('no matches', response.data);
-      return null;
-    }
-  })
-  .catch(function (error) {
-    console.error('error', error);
-  });
-};
-
-module.exports = { checkGoogleBooks, checkYelp, checkMovieDB };
+module.exports = { checkOpenAi };
 
