@@ -56,6 +56,7 @@ router.get('/:id/tasks', (req, res) => {
   const userId = req.params.id;
 
   userinfo.getTasksForUser(userId)
+
     .then((result)=>{
      if (result.rows.length === 0) {
       res.status(404).send(`User has no task with id of ${userId} !`);
@@ -69,44 +70,49 @@ router.get('/:id/tasks', (req, res) => {
 router.get('/:id/tasks/edit', (req, res) => {
   const userId = req.params.id;
   // const newTaskName = req.body.newTaskName;
-  userinfo.editTask(userId,'play chess')
+  userinfo.editTask(userId,'Watch a film')
   .then((result) => {
     if (result.rows.length === 0) {
       return res.status(404).send('Task not found');
     }
-    //params will be replaced to (userId,listId,newListName) to be dynamic;
-    return userinfo.editTask(3,'Buy a new labtop');
-  })
-
-    .then((editTask) => {
-      // Check if a list was successfully updated
-      if (editTask.rows.length === 0) {
-
-        return res.status(500).send('Error updating list');
-
-      }
-      res.json(editTask.rows);
-    });
+    res.json(result.rows);
+  });
 
 });
 //will change  router.get to router.post later on
 //Add a new task to the the tasks table
-
-router.post('/:id/tasks/', (req, res) => {
-  const taskName = req.body.taskTitle;
+router.get ('/:id/tasks/add', (req, res) => {
+  const userId = req.params.id;
+  // const taskId = req.params.idTasks;
+  // const taskName = req.body.taskName;
   // const category = req.body.category;
-  console.log('req', req.body);
-  console.log('task', taskName);
 
-  userinfo.addTask(taskName, false, 4)
+  userinfo.addTask('Game of thrones ', false, 4)
     .then((result) => {
       if (result.rows.length === 0) {
         return res.status(500).json({ error: 'Error adding task' });
       }
-      // return userinfo.addTask('watch money heist 3',false,3);
-      // res.json(addTask.rows);
+      res.json(result.rows);
      });
 });
+
+// router.post('/:id/tasks/', (req, res) => {
+//   const taskName = req.body.taskTitle;
+//   // const category = req.body.category;
+//   console.log('req', req.body);
+//   console.log('task', taskName);
+
+//   userinfo.addTask(taskName, false, 4)
+//     .then((result) => {
+//       if (result.rows.length === 0) {
+//         return res.status(500).json({ error: 'Error adding task' });
+//       } else
+//       // return userinfo.addTask('watch money heist 3',false,3);
+//       {
+//         res.json(result.rows);
+//       }
+//      });
+// });
 //Delete a task
 router.post('/:id/tasks/delete', (req, res) => {
   const taskId = Object.keys(req.body)[0];
