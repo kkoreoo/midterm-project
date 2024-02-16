@@ -14,4 +14,10 @@ $(function() {
     }
   });
 
+  const $websiteName = $('.web-name');
+
+  $websiteName.on('click', function() {
+    window.location.replace("/");
+  });
+
 });

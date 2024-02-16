@@ -13,19 +13,6 @@
   margin-right: 7px;
 }
 
-.task-icon i:hover {
-  transform: scale(1.1);
-  cursor: pointer;
-}
-
-.hidden-icon-true {
-  display: none;
-}
-
-.task-icon i:hover + .hidden-icon-true {
-  display: block;
-}
-
 .tasks-list .task-content {
   display: flex;
   margin: 0 3px;

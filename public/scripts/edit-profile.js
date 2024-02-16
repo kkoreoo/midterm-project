@@ -3,7 +3,6 @@ $(function() {
   const editUserPage = function(userData) {
     const firstName = userData.first_name;
     const lastName = userData.last_name;
-    const email = userData.email;
 
     const template = `
     <header class="list-header edit-profile-header">
@@ -18,9 +17,7 @@ $(function() {
       <div class="last-name">
         <strong>Last Name:</strong><input id="last" name="last" placeholder="${lastName}"></input>
       </div>
-      <div class="email">
-        <strong>Email:</strong><input id="email" name="email" placeholder="${email}"></input>
-      </div>
+
       <button type="submit" id="edit-profile">Submit</button>
     </form>
     `;
@@ -34,8 +31,8 @@ $(function() {
   };
 
   // Retrieves user info from DB & repopulates DOM with edit profile HTML
-  const $editProfile = $('.edit-profile');
-  $editProfile.on('click', function() {
+  $(document).on('click', '.edit-profile', function() {
+    console.log('hello');
     $.ajax({
       url: "/users/1/",
       type: "GET",
@@ -47,18 +44,17 @@ $(function() {
 
   // Redirects back to home page
   $(document).on('click', '.return-to-home', function() {
-    setTimeout(() => {
       window.location.replace("/");
-    }, 250);
   });
 
   // POST - Submits new user data to update user's info in DB
   $(document).on('submit', '.edit-container', function(event) {
     event.preventDefault();
 
-    const $firstNameInput = $('#first').serialize().split('=')[1];
-    const $lastNameInput = $('#last').serialize().split('=')[1];
-    // const $emailInput = $('#email').serialize().split('=')[1];
+    let $firstNameInput = $('#first').serialize().split('=')[1];
+    $firstNameInput = $firstNameInput.replace(/%20/g,''); // Removes any whitespace
+    let $lastNameInput = $('#last').serialize().split('=')[1];
+    $lastNameInput = $lastNameInput.replace(/%20/g,''); // Removes any whitespace
     const data = {};
 
     // First & Last name is being updated
@@ -70,7 +66,7 @@ $(function() {
         type: "POST",
         data,
         success: (user) => {
-          reloadEditPage(user[0]);
+          window.location.replace("/");
         }
       });
       // Updates only first name
@@ -83,7 +79,7 @@ $(function() {
         type: "POST",
         data,
         success: (user) => {
-          reloadEditPage(user[0]);
+          window.location.replace("/");
         }
       });
       // Updates only last name
@@ -96,7 +92,7 @@ $(function() {
         type: "POST",
         data,
         success: (user) => {
-          reloadEditPage(user[0]);
+          window.location.replace("/");
         }
       });
     }

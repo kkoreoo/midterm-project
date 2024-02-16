@@ -45,13 +45,10 @@ $(function() {
       <article class="tasks-list">
         <span class="task-icon">
           <div class="task-icon ${category}">${categoryIcon}</div>
-          <div class="task-icon hidden-icon-true ${category}">${categoryIcon}</div>
-          <div class="task-icon hidden-icon-true ${category}">${categoryIcon}</div>
-          <div class="task-icon hidden-icon-true ${category}">${categoryIcon}</div>
         </span>
 
         <span class="task-content">
-          <div class="task-complete is-completed"><i class="fa-solid fa-square-check"></i></div>
+          <div class="task-complete is-completed ${taskId}"><i class="fa-solid fa-square-check"></i></div>
           <div class="task-name ${taskId}">${escape(taskName)}</div>
         </span>
 
@@ -67,9 +64,6 @@ $(function() {
       <article class="tasks-list">
       <span class="task-icon">
         <div class="task-icon ${category}">${categoryIcon}</div>
-        <div class="task-icon hidden-icon-true ${category}">${categoryIcon}</div>
-        <div class="task-icon hidden-icon-true ${category}">${categoryIcon}</div>
-        <div class="task-icon hidden-icon-true ${category}">${categoryIcon}</div>
       </span>
 
       <span class="task-content">
@@ -113,7 +107,6 @@ $(function() {
             $overlay.removeClass('active');
           }
           loadTasks();
-          $('.taskTitle').attr('placeholder', '');
         }
       });
     }
@@ -126,7 +119,6 @@ $(function() {
   const $toEatOnly = $('.to-eat');
   const $toReadOnly = $('.to-read');
   const $toBuyOnly = $('.to-buy');
-  // const $prorityTasks = $('.priority-tasks');
   const $completedTasks = $('.completed-tasks');
   let filter = null;
 
@@ -138,25 +130,25 @@ $(function() {
 
   // Displays only to watch tasks
   $toWatchOnly.on('click', function() {
-    filter = 1;
+    filter = 'watch';
     loadTasks(filter);
   });
 
   // Displays only to eat tasks
   $toEatOnly.on('click', function() {
-    filter = 2;
+    filter = 'eat';
     loadTasks(filter);
   });
 
   // Displays only to read tasks
   $toReadOnly.on('click', function() {
-    filter = 3;
+    filter = 'read';
     loadTasks(filter);
   });
 
   // Displays only to buy tasks
   $toBuyOnly.on('click', function() {
-    filter = 4;
+    filter = 'buy';
     loadTasks(filter);
   });
 
@@ -188,7 +180,7 @@ $(function() {
       // Populate tasks based off filter selected
     } else {
       for (const data of tasks) {
-        let taskCategory = data.category_id;
+        let taskCategory = data.category_name;
         if (taskCategory === filter) {
           $tasks = createTaskElement(data);
           $('.task-container').prepend($tasks);
@@ -212,30 +204,157 @@ $(function() {
 
   // Updates database that a task is completed
   $(document).on('click', '.task-complete', function(event) {
-    console.log('event details', event);
 
-    //ajax post request to update task status
+    const data = [];
+    data.push($(event.currentTarget).attr('class').split(' ')[1]);
+    data.push($(event.currentTarget).attr('class').split(' ')[2]);
+
+    $.ajax({
+      url: "/users/1/taskCompleted/edit",
+      type: "POST",
+      data: JSON.stringify(data),
+      dataType: "json",
+      success: () => {
+        loadTasks();
+      }
+    })
+    .done(function(response){
+      console.log(response);
+    })
+    .fail(function(error){
+      console.log(error);
+    })
   });
 
-  // Change category if user believes it is miscategorized
-  $(document).on('click', '.task-icon', function() {
-    console.log('hello icon clicked');
-    const $hiddenIcons = $('.hidden-icon-true');
+  // Opens up edit modal
+  $(document).on('click', '.task-edit', function(event) {
+    const taskId = $(event.currentTarget).attr('class').split(' ')[1];
 
-    if ($hiddenIcons.css('display') == 'none') {
-      console.log('hello world');
-      $hiddenIcons.show();
-    } else if ($hiddenIcons.css('display') != 'none') {
-      console.log('goodbye world');
-      $hiddenIcons.hide();
+    const template = `
+      <div class="overlay">
+      <section class="modal" id="edit-task-form">
+        <header class="new-task-header">
+          <h1>Edit Task Category </h1>
+          <div class="close-modal"><button type="button"><i class="fa-regular fa-rectangle-xmark"></i></button></div>
+        </header>
+        <form class="edit-task">
+          <div class="task-icon watch ${taskId}"><i class="fa-solid fa-film"></i></div>
+          <div class="task-icon eat ${taskId}"><i class="fa-solid fa-utensils"></i></div>
+          <div class="task-icon read ${taskId}"><i class="fa-solid fa-book"></i></div>
+          <div class="task-icon buy ${taskId}"><i class="fa-solid fa-cart-shopping"></i></div>
+       </form>
+      </section>
+   </div>
+   `;
+   const $overlay = $('.overlay');
+   $overlay.addClass('active');
+   $('.content').prepend(template);
+  });
+
+  // Closes edit modal
+  $(document).on('click', '.close-modal', function() {
+    if ($('#edit-task-form').css('display') != 'none') {
+      $('#edit-task-form').hide();
+      $('.overlay').removeClass('active');
     }
   });
 
+  // Changes category to watch
+  $(document).on('click', '.watch', function(event) {
+    const data = [];
+    data.push($(event.currentTarget).attr('class').split(' ')[1]);
+    data.push($(event.currentTarget).attr('class').split(' ')[2]);
+
+    $.ajax({
+      url: "/users/1/taskscategory/edit",
+      type: "POST",
+      data: JSON.stringify(data),
+      dataType: 'json',
+      success: () => {
+        const $editTaskForm = $('#edit-task-form');
+        const $overlay = $('.overlay');
+        if ($editTaskForm.css('display') != 'none') {
+          $editTaskForm.hide();
+          $overlay.removeClass('active');
+        }
+        loadTasks();
+      }
+    })
+  });
+
+  // Changes category to read
+  $(document).on('click', '.read', function(event) {
+    const data = [];
+    data.push($(event.currentTarget).attr('class').split(' ')[1]);
+    data.push($(event.currentTarget).attr('class').split(' ')[2]);
+    const $editTaskForm = $('#edit-task-form');
+    const $overlay = $('.overlay');
+
+
+    $.ajax({
+      url: "/users/1/taskscategory/edit",
+      type: "POST",
+      data: JSON.stringify(data),
+      dataType: 'json',
+      success: () => {
+        if ($editTaskForm.css('display') != 'none') {
+          $editTaskForm.hide();
+          $overlay.removeClass('active');
+        }
+        loadTasks();
+      }
+    })
+  });
+
+  // Changes category to eat
+  $(document).on('click', '.eat', function(event) {
+    const data = [];
+    data.push($(event.currentTarget).attr('class').split(' ')[1]);
+    data.push($(event.currentTarget).attr('class').split(' ')[2]);
+
+    $.ajax({
+      url: "/users/1/taskscategory/edit",
+      type: "POST",
+      data: JSON.stringify(data),
+      dataType: 'json',
+      success: () => {
+        const $editTaskForm = $('#edit-task-form');
+        const $overlay = $('.overlay');
+        if ($editTaskForm.css('display') != 'none') {
+          $editTaskForm.hide();
+          $overlay.removeClass('active');
+        }
+        loadTasks();
+      }
+    })
+  });
+
+  // Changes category to buy
+  $(document).on('click', '.buy', function(event) {
+    const data = [];
+    data.push($(event.currentTarget).attr('class').split(' ')[1]);
+    data.push($(event.currentTarget).attr('class').split(' ')[2]);
+
+    $.ajax({
+      url: "/users/1/taskscategory/edit",
+      type: "POST",
+      data: JSON.stringify(data),
+      dataType: 'json',
+      success: () => {
+        const $editTaskForm = $('#edit-task-form');
+        const $overlay = $('.overlay');
+        if ($editTaskForm.css('display') != 'none') {
+          $editTaskForm.hide();
+          $overlay.removeClass('active');
+        }
+        loadTasks();
+      }
+    })
+  });
 
   // Deletes Task
   $(document).on('click', '.task-delete', function(event) {
     const data = $(event.currentTarget).attr('class').split(' ')[1];
-    console.log(data);
     const confirmDelete = confirm("Are you sure you want to delete this task?");
 
     if (confirmDelete) {
@@ -249,5 +368,4 @@ $(function() {
       });
     }
   });
-
 });

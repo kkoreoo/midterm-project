@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="/styles/header.css" type="text/css">
   <link rel="stylesheet" href="/styles/side-navbar.css" type="text/css">
   <link rel="stylesheet" href="/styles/edit-profile.css" type="text/css">
+  <link rel="stylesheet" href="/styles/edit-task.css" type="text/css">
   <link rel="stylesheet" href="/styles/tasks.css" type="text/css">
   <link rel="stylesheet" href="/styles/modal.css" type="text/css">
 
@@ -32,6 +33,7 @@
   <!-- App JS -->
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/header.js"></script>
   <script type="text/javascript" src="/scripts/side-navbar.js"></script>
   <script type="text/javascript" src="/scripts/new-task.js"></script>
   <script type="text/javascript" src="/scripts/edit-profile.js"></script>
@@ -45,7 +47,7 @@
   <!-- Side Nav Bar (FIXED) -->
   <div class="wrapper">
     <div class="sidebar">
-      <h1>Smart To Do</h1>
+      <h1 class="web-name">Smart To Do</h1>
       <ul>
         <li class="filter-tasks"><span>Filter By</span> <i class="fa-solid fa-list"></i></li>
         <div class="filter-list">
@@ -61,15 +63,6 @@
 
     <!-- Top Nav Bar (FIXED) -->
     <main class="content">
-      <ul class="username">
-        <li>
-          <span>Username <i class="fa-sharp fa-solid fa-angle-down"></i></span>
-          <ul class="username-dropdown">
-            <li class="edit-profile"><span>Edit Profile</span></li>
-          </ul>
-        </li>
-      </ul>
-
 
       <!-- Task List Header -->
       <header class="list-header">
@@ -85,7 +78,7 @@
             <div class="close-modal"><button type="button"><i class="fa-regular fa-rectangle-xmark"></i></button></div>
           </header>
           <form class="input-task-title" id="post-task">
-            <input name="taskTitle" placeholder="What task would you like to accomplish?"></input>
+            <input name="taskTitle" class="taskTitle" placeholder="What task would you like to accomplish?"></input>
             <div class="submit-new-task"><button type="submit">Submit</button></div>
           </form>
         </section>

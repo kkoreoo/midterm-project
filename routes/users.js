@@ -8,30 +8,30 @@ const db = require('../db/connection');
 
 //libraries and packages
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 const userinfo = require('../db/queries/users');
 const { checkOpenAi } = require('../api-calls');
 
 //ROUTES
 router.get('/', (req, res) => {
   userinfo.getUsers()
-  .then((result)=>{
+    .then((result) => {
 
-    res.json(result.rows);
-  });
+      res.json(result.rows);
+    });
 });
 
 // READ - Sends client a user's info
 router.get('/:id', (req, res) => {
   const userId = req.params.id;
   userinfo.getOnlyOneUser(userId)
-  .then((result)=>{
-    if (result.rows.length === 0) {
-      res.status(404).send('User not found');
-    }
+    .then((result) => {
+      if (result.rows.length === 0) {
+        res.status(404).send('User not found');
+      }
 
-    res.json(result.rows);
-  });
+      res.json(result.rows);
+    });
 });
 
 // EDIT - Updates user info in DB
@@ -39,11 +39,11 @@ router.post('/:id/edit', (req, res) => {
 
   const userId = req.params.id;
 
-  const {firstName, lastName} = req.body;
+  const { firstName, lastName } = req.body;
 
   // Update the user's first name and last name
 
-  userinfo.updateUser(userId, firstName,lastName)
+  userinfo.updateUser(userId, firstName, lastName)
 
     .then((updatedUser) => {
 
@@ -63,54 +63,60 @@ router.get('/:id/tasks', (req, res) => {
 
   userinfo.getTasksForUser(userId)
 
-    .then((result)=>{
-     if (result.rows.length === 0) {
-      res.status(404).send(`User has no task with id of ${userId} !`);
-      return;
-    }
-    res.json(result.rows);
-  });
-});
-
-// will change this to post to make a post requet
-//Edit an existing task category in the tasks table
-
-router.get('/:id/taskscategory/edit', (req, res) => {
-//place holder
-
-  const taskId = req.body.id;
-
-  const taskCategory = reg.body.categoryName;
-
-  userinfo.editTaskCategory(taskId,taskCategory)
-
-  .then((result) => {
-    if (result.rows.length === 0) {
-
-      return res.status(404).send('Task not found');
-    }
-    res.json(result.rows);
-  });
-
-});
-//set the task status to true
-router.post('/:id/taskCompleted/edit', (req, res) => {
-  
-    const taskId = req.params.id;
-
-    // const taskStatus = reg.body.SomeName;
-
-    userinfo.CompleteTask(taskId,'t')
     .then((result) => {
-
       if (result.rows.length === 0) {
-
-        return res.status(404).send('Task status was not updated ');
+        res.status(404).send(`User has no task with id of ${userId} !`);
+        return;
       }
       res.json(result.rows);
     });
+});
 
-  });
+//Edit an existing task category in the tasks table
+router.post('/:id/taskscategory/edit', (req, res) => {
+  let data = Object.keys(req.body);
+  data = data[0].split(',');
+  const category = data[0].replace(/"/g, '');
+  const taskId = data[1].replace(/"/g, '');
+
+
+  userinfo.editTaskCategory(taskId, category)
+    .then(() => {
+      res.json({});
+    })
+    .catch(error => {
+      console.log('error', error);
+    });
+});
+
+//set the task status to true
+router.post('/:id/taskCompleted/edit', (req, res) => {
+  let data = Object.keys(req.body);
+  data = data[0].split(',');
+
+  const valOne = data[0].replace(/"/g, ''); // Task ID if incomplete task
+  const valTwo = data[1].replace(/"/g, ''); // Task ID if completed task
+
+  // Change Task Status to Completed
+  if (valTwo === 'null') {
+    userinfo.CompleteTask(valOne, 't')
+      .then((result) => {
+        if (result.rows.length === 0) {
+          return res.status(404).send('Task status was not updated ');
+        }
+        res.json(result.rows);
+      });
+  // Change Task Status to Incomplete
+  } else {
+    userinfo.CompleteTask(valTwo, 'f')
+      .then((result) => {
+        if (result.rows.length === 0) {
+          return res.status(404).send('Task status was not updated ');
+        }
+        res.json(result.rows);
+      });
+  }
+});
 
 //Add a new task to the the tasks table
 router.post('/:id/tasks/', (req, res) => {
@@ -119,13 +125,11 @@ router.post('/:id/tasks/', (req, res) => {
     .then((category) => {
       if (category) {
         userinfo.addTask(taskName, false, category);
+        res.status(200).end();
       } else {
-        console.log('null object');
+        res.json({message: 'null'});
       }
-    })
-    .then(() => {
-      console.log('successfully added to db');
-      res.status(200).end();
+
     })
     .catch(error => {
       console.log('error', error);
@@ -140,7 +144,7 @@ router.post('/:id/tasks/delete', (req, res) => {
       if (result.rows.length === 0) {
         res.status(200).json({ message: 'Task deleted successfully.' });
       }
-     });
+    });
 });
 
 module.exports = router;
