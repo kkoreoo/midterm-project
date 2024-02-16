@@ -40,13 +40,6 @@ app.use('/api/users', userApiRoutes);
 app.use('/users', usersRoutes);
 // Note: mount other resources here, using the same pattern above
 
-// Home page
-// Warning: avoid creating more routes in this file!
-// Separate them into separate routes files (see above).
-
-// app.get('/', (req, res) => {
-//   res.render('index');
-// });
 
 // Example route to perform database operation
 app.get('/tasks', async (req, res) => {

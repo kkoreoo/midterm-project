@@ -32,7 +32,6 @@ $(function() {
 
   // Retrieves user info from DB & repopulates DOM with edit profile HTML
   $(document).on('click', '.edit-profile', function() {
-    console.log('hello');
     $.ajax({
       url: "/users/1/",
       type: "GET",
@@ -73,7 +72,6 @@ $(function() {
     } else if ($firstNameInput.length !== 0) {
       data.firstName = $firstNameInput;
       data.lastName = $('#last').attr("placeholder");
-      console.log('first name only', data);
       $.ajax({
         url: "/users/1/edit",
         type: "POST",
@@ -86,7 +84,6 @@ $(function() {
     } else if ($lastNameInput.length !== 0) {
       data.lastName = $lastNameInput;
       data.firstName = $('#first').attr("placeholder");
-      console.log('last name only', data);
       $.ajax({
         url: "/users/1/edit",
         type: "POST",

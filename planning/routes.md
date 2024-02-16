@@ -1,8 +1,9 @@
 ### ROUTES
 RESTful
  
-# MyLists will be gone 
+# Routes
 BROWSE
+- GET users/:id/tasks
 EDIT
 - POST users/:id/tasks/:idTasks/edit <!-- edit task -->                <!--Almost DONE✅ -->
 ADD
@@ -13,7 +14,6 @@ DELETE
 
 # Users
 READ
-- GET users/                  <!--DONE✅ -->
 - GET users/:id               <!--DONE✅ -->
 EDIT
 - POST users/:id/edit         <!--DONE✅ -->
