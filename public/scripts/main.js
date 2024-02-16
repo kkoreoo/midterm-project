@@ -33,7 +33,7 @@ $(function() {
       categoryIcon = '<i class="fa-solid fa-book"></i>';
 
       // Products Icon
-    } else if (category == 'buy') {
+    } else if (category === 'buy') {
       categoryIcon = '<i class="fa-solid fa-cart-shopping"></i>';
     }
 
