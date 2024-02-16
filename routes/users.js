@@ -125,11 +125,12 @@ router.post('/:id/tasks/', (req, res) => {
     .then((category) => {
       if (category) {
         userinfo.addTask(taskName, false, category);
-        res.status(200).end();
       } else {
         res.json({message: 'null'});
       }
-
+    })
+    .then(() => {
+      res.status(200).end();
     })
     .catch(error => {
       console.log('error', error);
