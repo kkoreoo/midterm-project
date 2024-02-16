@@ -78,10 +78,9 @@ router.get('/:id/tasks', (req, res) => {
 router.get('/:id/taskscategory/edit', (req, res) => {
 //place holder
 
-  const taskId = req.params.id;
+  const taskId = req.body.id;
 
-  const taskCategory = categorizeTask();
-
+  const taskCategory = reg.body.categoryName;
 
   userinfo.editTaskCategory(taskId,taskCategory)
 
@@ -94,6 +93,24 @@ router.get('/:id/taskscategory/edit', (req, res) => {
   });
 
 });
+//set the task status to true
+router.post('/:id/taskCompleted/edit', (req, res) => {
+  
+    const taskId = req.params.id;
+
+    // const taskStatus = reg.body.SomeName;
+
+    userinfo.CompleteTask(taskId,'t')
+    .then((result) => {
+
+      if (result.rows.length === 0) {
+
+        return res.status(404).send('Task status was not updated ');
+      }
+      res.json(result.rows);
+    });
+
+  });
 
 //Add a new task to the the tasks table
 router.post('/:id/tasks/', (req, res) => {
