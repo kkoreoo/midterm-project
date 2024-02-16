@@ -111,6 +111,7 @@ $(function() {
             $overlay.removeClass('active');
           }
           loadTasks();
+          $('.taskTitle').attr('placeholder', '');
         }
       });
     }

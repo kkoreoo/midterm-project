@@ -48,6 +48,15 @@
       `;
       return db.query(query, [newCategoryName,taskId]);
     };
+    const  CompleteTask = (taskId, taskStatus) => {
+      const CompleteTaskquery = `
+        UPDATE tasks
+        SET task_status= $1
+        WHERE id = $2
+        RETURNING *;
+      `;
+      return db.query(CompleteTaskquery, [taskStatus,taskId]);
+    };
     //Insert new tasks to the tasks table
     const addTask = (taskName,taskStatuts,category_name) => {
       const query = `
@@ -70,6 +79,7 @@
     updateUser,
     getTasksForUser,
     editTaskCategory,
+    CompleteTask,
     addTask,
     deleteTask
   };
