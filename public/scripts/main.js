@@ -104,7 +104,9 @@ $(function() {
         success: () => {
           const $overlay = $('.overlay');
           const $newTaskForm = $('#new-task-form');
-          console.log($newTaskForm.css('display'));
+
+          // clears input field
+          $('.taskTitle').val('');
 
           if ($newTaskForm.css('display') != 'none') {
             $newTaskForm.hide();
@@ -204,7 +206,6 @@ $(function() {
       }
     });
   };
-
   // Loads page every time '/' is visited
   loadTasks();
 
@@ -218,6 +219,15 @@ $(function() {
   // Change category if user believes it is miscategorized
   $(document).on('click', '.task-icon', function() {
     console.log('hello icon clicked');
+    const $hiddenIcons = $('.hidden-icon-true');
+
+    if ($hiddenIcons.css('display') == 'none') {
+      console.log('hello world');
+      $hiddenIcons.show();
+    } else if ($hiddenIcons.css('display') != 'none') {
+      console.log('goodbye world');
+      $hiddenIcons.hide();
+    }
   });
 
 
