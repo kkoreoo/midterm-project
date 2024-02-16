@@ -105,8 +105,8 @@ $(function() {
           if ($newTaskForm.css('display') != 'none') {
             $newTaskForm.hide();
             $overlay.removeClass('active');
+            loadTasks();
           }
-          loadTasks();
         }
       });
     }
